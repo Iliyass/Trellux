@@ -1,0 +1,427 @@
+#board {
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: rgb(0, 121, 191);
+    white-space: nowrap;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.list-wrapper {
+    box-sizing: border-box;
+    color: rgb(77, 77, 77);
+    display: inline-block;`
+    vertical-align: top;
+    white-space: nowrap;
+    width: 270px;
+    border: 0px none rgb(77, 77, 77);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0px 5px;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_1*/
+
+.list-container {
+    box-sizing: border-box;
+    display: flex;
+    max-height: 100%;
+    position: relative;
+    width: 270px;
+    background: rgb(226, 228, 230) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(77, 77, 77);
+    border-radius: 3px 3px 3px 3px;
+    flex-flow: column nowrap;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_2*/
+
+.list-name {
+    cursor: -webkit-grab;
+    height: 19px;
+    min-height: 19px;
+    min-width: auto;
+    position: relative;
+    width: 226px;
+    border: 0px none rgb(77, 77, 77);
+    flex: 0 0 auto;
+    outline: rgb(77, 77, 77) none 0px;
+    padding: 8px 34px 8px 10px;
+}/*#DIV_3*/
+
+.list-name:after {
+    clear: both;
+    cursor: -webkit-grab;
+    display: table;
+    border: 0px none rgb(77, 77, 77);
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_3:after*/
+
+.list-name-text {
+    cursor: pointer;
+    display: inline;
+    height: auto;
+    min-height: 19px;
+    min-width: 30px;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    width: auto;
+    word-wrap: break-word;
+    border: 0px none rgb(77, 77, 77);
+    font-size: 15px;
+    margin: 0px;
+    outline: rgb(77, 77, 77) none 0px;
+    overflow: hidden;
+}/*#H2_4*/
+
+
+
+.list-cards-container {
+    min-width: auto;
+    width: 254px;
+    z-index: 1;
+    border: 0px none rgb(77, 77, 77);
+    flex: 1 1 auto;
+    margin: 0px 4px;
+    outline: rgb(77, 77, 77) none 0px;
+    overflow: auto;
+    padding: 0px 4px;
+}/*#DIV_10*/
+
+.list-cards-container:after {
+    clear: both;
+    display: table;
+    border: 0px none rgb(77, 77, 77);
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_10:after*/
+
+.list-card {
+    cursor: pointer;
+    height: 34px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+    width: 254px;
+    z-index: 0;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box;
+    border-top: 0px none rgb(77, 77, 77);
+    border-right: 0px none rgb(77, 77, 77);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    border-left: 0px none rgb(77, 77, 77);
+    border-radius: 3px 3px 3px 3px;
+    margin: 0px 0px 6px;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_11, #DIV_50*/
+
+
+.list-card-item {
+    cursor: pointer;
+    height: 24px;
+    position: relative;
+    width: 238px;
+    z-index: 10;
+    border: 0px none rgb(77, 77, 77);
+    outline: rgb(77, 77, 77) none 0px;
+    overflow: auto;
+    padding: 6px 8px 4px;
+}/*#DIV_16, #DIV_55*/
+
+
+.list-card-name {
+    clear: both;
+    display: block;
+    overflow-wrap: break-word;
+    text-decoration: none;
+    word-wrap: break-word;
+    margin: 0px 0px 4px;
+    overflow: hidden;
+}/*#A_18, #A_57*/
+
+
+.list-add-card {
+    color: rgb(140, 140, 140);
+    display: block;
+    height: 18px;
+    min-height: auto;
+    min-width: auto;
+    position: relative;
+    text-decoration: none;
+    width: 250px;
+    perspective-origin: 135px 17px;
+    transform-origin: 135px 17px;
+    border: 0px none rgb(140, 140, 140);
+    border-radius: 0 0 3px 3px;
+    flex: 0 0 auto;
+    outline: rgb(140, 140, 140) none 0px;
+    padding: 8px 10px;
+}/*#A_63*/
+
+
+.card-composer {
+    color: rgb(77, 77, 77);
+    height: 109px;
+    width: 254px;
+    perspective-origin: 127px 58.5px;
+    transform-origin: 127px 58.5px;
+    border: 0px none rgb(77, 77, 77);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(77, 77, 77) none 0px;
+    padding: 0px 0px 8px;
+}/*#DIV_1*/
+
+.list-card-composer-edit {
+    color: rgb(77, 77, 77);
+    cursor: pointer;
+    height: 68px;
+    max-width: 300px;
+    min-height: 20px;
+    position: relative;
+    width: 254px;
+    z-index: 0;
+    perspective-origin: 127px 34.5px;
+    transform-origin: 127px 34.5px;
+    background: rgb(255, 255, 255);
+    border-top: 0px none rgb(77, 77, 77);
+    border-right: 0px none rgb(77, 77, 77);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    border-left: 0px none rgb(77, 77, 77);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0px 0px 6px;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_2*/
+
+.list-card-composer-edit-container {
+    color: rgb(77, 77, 77);
+    cursor: pointer;
+    height: 58px;
+    position: relative;
+    width: 238px;
+    z-index: 10;
+    perspective-origin: 127px 34px;
+    transform-origin: 127px 34px;
+    border: 0px none rgb(77, 77, 77);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(77, 77, 77) none 0px;
+    overflow: auto;
+    padding: 6px 8px 4px;
+}/*#DIV_3*/
+
+.list-card-composer-edit-container:after {
+    clear: both;
+    color: rgb(77, 77, 77);
+    cursor: pointer;
+    display: table;
+    border: 0px none rgb(77, 77, 77);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_3:after*/
+
+.list-card-composer-edit-container textarea {
+    display: block;
+    max-height: 162px;
+    min-height: 54px;
+    resize: vertical;
+    width: 238px;
+    border: 0px none rgb(77, 77, 77);
+    border-radius: 3px 3px 3px 3px;
+    margin: 0px 0px 4px;
+    overflow: hidden;
+}/*#TEXTAREA_5*/
+
+.list-card-add {
+    color: rgb(77, 77, 77);
+    height: 34px;
+    width: 254px;
+    perspective-origin: 127px 17px;
+    transform-origin: 127px 17px;
+    border: 0px none rgb(77, 77, 77);
+    margin: 1px 0px 0px;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_7*/
+
+.list-card-add:after {
+    clear: both;
+    color: rgb(77, 77, 77);
+    display: table;
+    border: 0px none rgb(77, 77, 77);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(77, 77, 77) none 0px;
+}/*#DIV_7:after*/
+
+.list-card-add-input {
+    box-shadow: rgb(63, 111, 33) 0px 1px 0px 0px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 34px;
+    min-height: 34px;
+    text-align: center;
+    white-space: pre;
+    width: 62.7031px;
+    align-items: flex-start;
+    perspective-origin: 31.3438px 17px;
+    transform-origin: 31.3438px 17px;
+    background: rgba(0, 0, 0, 0) linear-gradient(rgb(97, 189, 79) 0px, rgb(90, 172, 68) 100%) repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal bold normal 14px / 22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0px 4px 5px 0px;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 5px 18px;
+}/*#INPUT_8*/
+
+
+
+
+
+
+.list-add {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    height: 40px;
+    min-height: 30px;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 270px;
+    perspective-origin: 135px 20px;
+    transform-origin: 135px 20px;
+    background: rgba(0, 0, 0, 0.117647) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0px 10px 0px 5px;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 4px;
+    transition: background 0.085s ease-in 0s, opacity 0.04s ease-in 0s, border-color 0.085s ease-in 0s;
+}/*#DIV_1*/
+
+.list-add.mod-add {
+    height: auto;
+    min-height: 30px;
+    border-radius: 3px;
+    background-color: #e2e4e6;
+    -webkit-transition: background 85ms ease-in,opacity 40ms ease-in,border-color 85ms ease-in;
+    transition: background 85ms ease-in,opacity 40ms ease-in,border-color 85ms ease-in;
+}
+
+.list-add.mod-add span{
+    display: none;
+    padding: 7px;
+    color: rgba(255,255,255,.7);
+    -webkit-transition: color 85ms ease-in;
+    transition: color 85ms ease-in;
+}
+
+.list-add.mod-add .list-name-input {
+    background: rgba(0,0,0,.05);
+    border-color: #aaa;
+    box-shadow: inset 0 1px 8px rgba(0,0,0,.15);
+    display: block;
+    margin: 0;
+    -webkit-transition: margin 85ms ease-in,background 85ms ease-in;
+    transition: margin 85ms ease-in,background 85ms ease-in;
+    width: 100%;
+}
+
+
+
+/* .list-add form {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    height: 32px;
+    white-space: nowrap;
+    width: 262px;
+    perspective-origin: 131px 16px;
+    transform-origin: 131px 16px;
+    border: 0px none rgb(255, 255, 255);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 0px;
+    outline: rgb(255, 255, 255) none 0px;
+}#FORM_2 */
+
+.list-add span{
+    color: rgba(255, 255, 255, 0.701961);
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    white-space: nowrap;
+    width: 248px;
+    perspective-origin: 131px 16px;
+    transform-origin: 131px 16px;
+    border: 0px none rgba(255, 255, 255, 0.701961);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgba(255, 255, 255, 0.701961) none 0px;
+    padding: 7px;
+    transition: color 0.085s ease-in 0s;
+}/*#SPAN_3*/
+
+.list-add:not(.mod-add):hover{
+      background: rgba(0,0,0,.3);
+}
+
+.list-add input {
+    background-position: 0px 0px;
+    color: rgb(77, 77, 77);
+    cursor: pointer;
+    display: none;
+    height: auto;
+    min-height: 34px;
+    white-space: nowrap;
+    width: 100%;
+    perspective-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0px 0px / auto padding-box border-box;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(77, 77, 77) none 0px;
+    padding: 7px;
+    transition: margin 0.085s ease-in 0s, background 0.085s ease-in 0s;
+}/*#INPUT_4*/
+
+
+
+
+.list-add.mod-add .edit-controls {
+    clear: both;
+    color: rgb(77, 77, 77);
+    height: 32px;
+    white-space: nowrap;
+    width: 262px;
+    perspective-origin: 131px 16px;
+    transform-origin: 131px 16px;
+    border: 0px none rgb(77, 77, 77);
+    font: normal normal normal normal 14px / 18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    margin: 4px 0px 0px;
+    outline: rgb(77, 77, 77) none 0px;
+    overflow: hidden;
+    transition: margin 0.085s ease-in 0s, height 0.085s ease-in 0s;
+}/*#DIV_1*/
+
+
+.list-add.mod-add .edit-controls input {
+    box-shadow: rgb(63, 111, 33) 0px 1px 0px 0px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 30px;
+    min-height: 30px;
+    text-align: center;
+    width: 72.4531px;
+    align-items: flex-start;
+    perspective-origin: 36.2188px 15px;
+    transform-origin: 36.2188px 15px;
+    background: rgba(0, 0, 0, 0) linear-gradient(rgb(97, 189, 79) 0px, rgb(90, 172, 68) 100%) repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal bold normal 14px / 22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 5px 20px;
+}/*#INPUT_2*/
