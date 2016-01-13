@@ -2,6 +2,14 @@ import React from 'react'
 
 
 export default React.createClass({
+  componentDidMount: function () {
+    console.log(this.listName)
+  },
+  componentWillReceiveProps: function (nextProps) {
+    if(nextProps.addingList){
+      this.listName.focus()
+    }
+  },
   render: function () {
       const addingList = (this.props.addingList) ? 'mod-add' : ''
       return (

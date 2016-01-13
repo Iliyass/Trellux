@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default React.createClass({
+  componentDidMount: function () {
+    this.txtArea.focus()
+  },
   render: function () {
       return (
         <div className="list-card-composer">

@@ -3,7 +3,9 @@ import {
   REQUEST_LISTS, RECEIVE_LISTS,
   REQUEST_CARDS, RECEIVE_CARDS,
   ADDING_CARD, POSTED_CARD,
-  ADDING_LIST, POSTED_LIST
+  ADDING_LIST, POSTED_LIST,
+  REVOKE_ADDING, SHOW_CARD,
+  CLOSE_CARD
 } from '../actions'
 
 function lists(state = {
@@ -65,6 +67,7 @@ function add_cards(state = null, action) {
   switch (action.type) {
     case ADDING_CARD:
       return action.listId
+    case REVOKE_ADDING:
     case POSTED_CARD:
       return null
     default:
@@ -76,8 +79,20 @@ function addingList(state = false, action) {
   switch (action.type) {
     case ADDING_LIST:
       return true
+    case REVOKE_ADDING:
     case POSTED_LIST:
       return false
+    default:
+      return state
+  }
+}
+
+function currentCard(state = null, action) {
+  switch (action.type) {
+    case SHOW_CARD:
+       return action.cardId
+    case CLOSE_CARD:
+        return null
     default:
       return state
   }
@@ -87,7 +102,8 @@ const rootReducer = combineReducers({
   lists,
   cards,
   addingCardTo: add_cards,
-  addingList
+  addingList,
+  currentCard
 })
 
 export default rootReducer

@@ -5,7 +5,10 @@ export default ({
   list,
   addCardHandler,
   addedCardHandler,
-  addingCardTo
+  addingCardTo,
+  showingCard,
+  currentCard,
+  closeCardHandler
 }) => {
   const { _id, name = 'Name', cards = [] } = list
   console.log("List addingCardTo", (addingCardTo === _id))
@@ -21,7 +24,7 @@ export default ({
 
     		<div className="list-cards-container">
           {
-            cards.map( c => (<Card {...c}  />))
+            cards.map( c => (<Card closeCardHandler={closeCardHandler} currentCard={currentCard === c._id} showingCard={showingCard} {...c}  />))
           }
 
           {cardComposer}

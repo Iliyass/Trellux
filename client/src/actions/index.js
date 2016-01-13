@@ -11,6 +11,31 @@ export const INVALIDATE_LIST  = 'INVALIDATE_LIST'
 export const ADDING_CARD = 'ADDING_CARD'
 export const POSTED_CARD = 'POSTED_CARD'
 
+export const REVOKE_ADDING = 'REVOKE_ADDING'
+
+export const SHOW_CARD = 'SHOW_CARD'
+export const CLOSE_CARD = 'CLOSE_CARD'
+
+
+export function closeCard() {
+  return {
+    type: CLOSE_CARD
+  }
+}
+export function showCard(cardId) {
+  return {
+    type: SHOW_CARD,
+    cardId
+  }
+}
+
+export function revokeAdding() {
+  return {
+    type: REVOKE_ADDING
+  }
+}
+
+
 const POST_REQUEST_OPTIONS = { method: 'post',   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' } }
 
 const GENERATE_POST = (data) => {
@@ -34,7 +59,7 @@ export function addCard(card){
 const POST_CARD = 'http://localhost:3000/lists/:listId/cards'
 
 export function postCard(listId, cardContent) {
-  const card = { desc: cardContent }
+  const card = { name: cardContent }
   return dispatch => {
     return fetch(POST_CARD.replace(':listId', listId), GENERATE_POST(card))
         .then(response => response.json())

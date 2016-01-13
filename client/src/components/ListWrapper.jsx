@@ -9,14 +9,18 @@ export default ({
   addingCardTo,
   addingListHandler,
   addingList,
-  addedListHandler
+  addedListHandler,
+  boardClickHandler,
+  showingCard,
+  currentCard,
+  closeCardHandler
 }) => {
   return (
-    <div>
+    <div onClick={boardClickHandler}>
       {
-        lists.map((list) => (<List addedCardHandler={addedCardHandler} addCardHandler={addCardHandler} {...{list, addingCardTo}}  />) )
+        lists.map((list) => (<List closeCardHandler={closeCardHandler} currentCard={currentCard} showingCard={showingCard} addedCardHandler={addedCardHandler} addCardHandler={addCardHandler} {...{list, addingCardTo}}  />) )
       }
-      <ListComposer addingList={addingList} addingListHandler={addingListHandler}  addedListHandler={addedListHandler}/>)
+      <ListComposer addingList={addingList} addingListHandler={addingListHandler}  addedListHandler={addedListHandler}/>
     </div>
   )
 }

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Lists from '../components/ListWrapper.jsx'
 import { connect } from 'react-redux'
-import { requestLists, fetchLists, fetchCards, addingCard, postCard, addingList, postList } from '../actions'
+import { requestLists, fetchLists, fetchCards,
+         addingCard, postCard, addingList,
+         postList, revokeAdding, showCard,
+         closeCard } from '../actions'
 
 class Board extends Component{
   constructor(props) {
@@ -23,22 +26,34 @@ class Board extends Component{
     this.dispatch(postCard(listId, cardContent))
   }
   addingListHandler (){
-    console.log("------------------------------------ ADDEEDDD")
     this.dispatch(addingList())
   }
   addedListHandler (listName){
     this.dispatch(postList(listName))
   }
+  boardClickHandler(e){
+    if(e.target === this.boardNode){
+      this.dispatch(revokeAdding())
+    }
+  }
+  closeCardHandler(){
+    this.dispatch(closeCard())
+  }
+  showingCard (cardId){
+    this.dispatch(showCard(cardId))
+  }
   render() {
-    const {isFetching, lists, addingList} = this.props
-    const content = (! isFetching) ? <Lists addedListHandler={(v) => this.addedListHandler(v)}
+    const {isFetching, lists, addingList, currentCard} = this.props
+    const content = (! isFetching) ? <Lists closeCardHandler={() => this.closeCardHandler() }
+                                            showingCard={(id) => this.showingCard(id)}
+                                            addedListHandler={(v) => this.addedListHandler(v)}
                                             addingList={addingList}
                                             addingListHandler={() => this.addingListHandler() }
                                             addedCardHandler={(id, cardContent) => this.addedCardHandler(id, cardContent) }
                                             addCardHandler={(id) => this.addingCardHandler(id)} {...this.props}  />
                                             : <h2> Loading ... </h2>
     return (
-        <div id="board">
+        <div id="board" onClick={(e) => this.boardClickHandler(e) } ref={(r) => this.boardNode = r}>
           { content }
         </div>
     )
@@ -60,7 +75,8 @@ function mapStateToProps(state){
     isFetching,
     lists: items,
     addingCardTo: state.addingCardTo,
-    addingList: state.addingList
+    addingList: state.addingList,
+    currentCard: state.currentCard
   }
 }
 
