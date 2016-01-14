@@ -38,6 +38,13 @@ function lists(state = {
 
 function cards(state = [], action) {
   switch (action.type) {
+    case POSTED_LIST:
+      return state.concat([{
+        isFetching: true,
+        didInvalidate: false,
+        listId: action.list._id,
+        items: []
+      }])
     case REQUEST_CARDS:
       return state.concat([{
         isFetching: true,
