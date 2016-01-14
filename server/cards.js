@@ -32,6 +32,12 @@ function getListCards(listId, cb) {
   })
 }
 
+function updateDesc(id, desc, cb) {
+  Card.update({_id: id}, {$set: {desc: desc}}, (err) => {
+      Card.findOne({_id: id}, cb)
+  })
+}
+
 // CRUD Functions
 function add(model, cb) {
   const card = new Card(model)
@@ -46,13 +52,23 @@ function remove(){
 // Init Lists Module
 function Init() {
   let router = express.Router()
+
+  router.put('/:listId/cards/:cardId', function (req, res) {
+    updateDesc(req.params.cardId, req.body.desc, (err, savedCard) => {
+      if(err) res.send("Error !")
+      res.send(savedCard)
+    })
+  })
+
+
+
   // POSTS: /cards/
   router.post('/:listid/cards', function(req, res) {
     const card = req.body
     card.listId = req.params.listid
-    add(card, (err) => {
+    add(card, (err, savedCard) => {
       if(err) res.send("Error !")
-      res.send(card)
+      res.send(savedCard)
     })
   });
 

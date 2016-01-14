@@ -5,7 +5,8 @@ import {
   ADDING_CARD, POSTED_CARD,
   ADDING_LIST, POSTED_LIST,
   REVOKE_ADDING, SHOW_CARD,
-  CLOSE_CARD
+  CLOSE_CARD, EDITING_CARD_DESC,
+  SAVING_CARD_DESC, SAVED_CARD_DESC
 } from '../actions'
 
 function lists(state = {
@@ -58,6 +59,18 @@ function cards(state = [], action) {
           }
           return card
       })
+    case SAVING_CARD_DESC:
+      return state.map( (card) => {
+          if(card.listId === action.card.listId){
+            card.items = card.items.map( (c) => {
+              if(c._id === action.card._id){
+                c.desc = action.card.desc
+              }
+              return c
+            })
+          }
+          return card
+      })
     default:
       return state
   }
@@ -87,16 +100,21 @@ function addingList(state = false, action) {
   }
 }
 
-function currentCard(state = null, action) {
+function currentCard(state = { id: null, editingDesc: false }, action) {
   switch (action.type) {
+    case SAVED_CARD_DESC:
+      return Object.assign({}, state, { editingDesc : false })
     case SHOW_CARD:
-       return action.cardId
+      return Object.assign({}, state, { id : action.cardId, editingDesc : false })
+    case EDITING_CARD_DESC:
+       return Object.assign({}, state, { editingDesc : true })
     case CLOSE_CARD:
-        return null
+      return Object.assign({}, state, { id: null, editingDesc : false })
     default:
       return state
   }
 }
+
 
 const rootReducer = combineReducers({
   lists,

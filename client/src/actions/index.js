@@ -10,12 +10,47 @@ export const INVALIDATE_LIST  = 'INVALIDATE_LIST'
 
 export const ADDING_CARD = 'ADDING_CARD'
 export const POSTED_CARD = 'POSTED_CARD'
+export const EDITING_CARD_DESC = 'EDITING_CARD_DESC'
+export const SAVING_CARD_DESC  = 'SAVING_CARD_DESC'
+export const SAVED_CARD_DESC  = 'SAVED_CARD_DESC'
 
 export const REVOKE_ADDING = 'REVOKE_ADDING'
 
 export const SHOW_CARD = 'SHOW_CARD'
 export const CLOSE_CARD = 'CLOSE_CARD'
 
+export function savedCardDesc() {
+  return {
+    type: SAVED_CARD_DESC
+  }
+}
+
+export function savingCardDesc(card) {
+  return {
+    type: SAVING_CARD_DESC,
+    card
+  }
+}
+
+const EDIT_CARD_URL = 'http://localhost:3000/lists/:listId/cards/:cardId'
+
+const PUT_REQUEST_OPTIONS = { method: 'put',   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' } }
+
+export function postCardDesc(card) {
+  return dispatch => {
+    return fetch(EDIT_CARD_URL.replace(':listId', card.listId).replace(':cardId', card._id), GENERATE_POST(card, PUT_REQUEST_OPTIONS))
+            .then(response => response.json())
+            .then(newCard  => dispatch(savingCardDesc(newCard)) )
+            .then(dispatch(savedCardDesc()))
+  }
+}
+
+export function editingCardDesc(cardId) {
+  return {
+    type: EDITING_CARD_DESC,
+    cardId
+  }
+}
 
 export function closeCard() {
   return {
@@ -38,8 +73,8 @@ export function revokeAdding() {
 
 const POST_REQUEST_OPTIONS = { method: 'post',   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' } }
 
-const GENERATE_POST = (data) => {
-  return Object.assign({}, POST_REQUEST_OPTIONS, {body: JSON.stringify(data) })
+const GENERATE_POST = (data, REQUEST_OPTIONS = POST_REQUEST_OPTIONS) => {
+  return Object.assign({}, REQUEST_OPTIONS, {body: JSON.stringify(data) })
 }
 
 export function addingCard(listId) {
@@ -56,16 +91,18 @@ export function addCard(card){
   }
 }
 
-const POST_CARD = 'http://localhost:3000/lists/:listId/cards'
+const POST_CARD_URL = 'http://localhost:3000/lists/:listId/cards'
 
 export function postCard(listId, cardContent) {
   const card = { name: cardContent }
   return dispatch => {
-    return fetch(POST_CARD.replace(':listId', listId), GENERATE_POST(card))
+    return fetch(POST_CARD_URL.replace(':listId', listId), GENERATE_POST(card))
         .then(response => response.json())
-        .then(card => dispatch(addCard(card)))
+        .then(newCard => dispatch(addCard(newCard)))
   }
 }
+
+
 
 
 const FETCH_LISTS_URL = 'http://localhost:3000/lists'

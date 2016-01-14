@@ -1,6 +1,35 @@
 import React from 'react'
 import Modal from 'react-modal'
 
+const CardDesriptionEdit = React.createClass({
+  componentDidMount(){
+    this.txtArea.focus()
+    this.txtArea.setSelectionRange(this.txtArea.value.length, this.txtArea.value.length)
+  },
+  render: function(){
+    const {_id, desc, name, listId} = this.props
+    return (
+              <div className="card-detail-edit edit">
+                  <textarea ref={(r) => this.txtArea = r} className="field" rows="3" col="10" defaultValue={desc}></textarea>
+                  <div className="edit-controls">
+                    <input className="desc-save" type="button" value="Save" onClick={() => this.props.saveCardDescHandler({_id, desc: this.txtArea.value, listId})}/>
+                  </div>
+              </div>
+            )
+  }
+})
+
+const CardDescription = React.createClass({
+  render: function(){
+    const {_id, desc = "Edit desc", name} = this.props
+    return (
+            <div className="card-desc" onClick={() => this.props.editingCardDescHandler(_id)}>
+              {desc}
+            </div>
+        )
+  }
+})
+
 const customStyles = {
     overlay : {
     position          : 'fixed',
@@ -15,7 +44,7 @@ const customStyles = {
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
-    marginTop             : '100px',
+    marginTop             : '150px',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
     backgroundColor       : '#edeff0',
@@ -45,7 +74,8 @@ export default React.createClass({
     this.props.closeCardHandler()
   },
   render: function () {
-    const {_id, desc, name} = this.props
+    const {_id, desc, name, listId,  currentCard} = this.props
+    const descComponent = (currentCard.id === _id && currentCard.editingDesc) ? (<CardDesriptionEdit saveCardDescHandler={this.props.saveCardDescHandler} {...{_id, desc, listId}} />) : (<CardDescription editingCardDescHandler={this.props.editingCardDescHandler} {...{_id, desc, name}} />)
     return (
       <div>
         <Modal
@@ -58,7 +88,7 @@ export default React.createClass({
               <h2 className="modal-title">{name}</h2>
           </div>
           <div className="modal-body">
-            {desc}
+            {descComponent}
           </div>
         </Modal>
       </div>

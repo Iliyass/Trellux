@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import { requestLists, fetchLists, fetchCards,
          addingCard, postCard, addingList,
          postList, revokeAdding, showCard,
-         closeCard } from '../actions'
+         closeCard, editingCardDesc, postCardDesc
+        } from '../actions'
 
 class Board extends Component{
   constructor(props) {
@@ -42,9 +43,18 @@ class Board extends Component{
   showingCard (cardId){
     this.dispatch(showCard(cardId))
   }
+  editingCardDescHandler(cardId){
+    this.dispatch(editingCardDesc(cardId))
+  }
+  saveCardDescHandler(card){
+    console.log("saveCardDescHandler", card);
+    this.dispatch(postCardDesc(card))
+  }
   render() {
     const {isFetching, lists, addingList, currentCard} = this.props
-    const content = (! isFetching) ? <Lists closeCardHandler={() => this.closeCardHandler() }
+    const content = (! isFetching) ? <Lists saveCardDescHandler={(card) => this.saveCardDescHandler(card) }
+                                            editingCardDescHandler={(id) => {this.editingCardDescHandler(id)}}
+                                            closeCardHandler={() => this.closeCardHandler() }
                                             showingCard={(id) => this.showingCard(id)}
                                             addedListHandler={(v) => this.addedListHandler(v)}
                                             addingList={addingList}

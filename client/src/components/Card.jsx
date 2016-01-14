@@ -4,16 +4,19 @@ export default ({
   _id,
   name,
   desc,
+  listId,
   showingCard,
   currentCard,
-  closeCardHandler
+  closeCardHandler,
+  editingCardDescHandler,
+  saveCardDescHandler
 }) => {
   return (
     <div className="list-card" >
         <div className="list-card-item" onClick={(e) => { console.log(e.target); showingCard(_id)} }>
           <a className="list-card-name">{name}</a>
         </div>
-        <CardModal closeCardHandler={closeCardHandler} isOpen={currentCard} {...{_id, name, desc}}/>
+        <CardModal saveCardDescHandler={saveCardDescHandler} editingCardDescHandler={editingCardDescHandler} closeCardHandler={closeCardHandler} currentCard={currentCard} isOpen={currentCard.id === _id} {...{_id, name, desc, listId}}/>
     </div>
   )
 }
