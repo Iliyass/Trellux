@@ -6,7 +6,8 @@ import {
   ADDING_LIST, POSTED_LIST,
   REVOKE_ADDING, SHOW_CARD,
   CLOSE_CARD, EDITING_CARD_DESC,
-  SAVING_CARD_DESC, SAVED_CARD_DESC
+  SAVING_CARD_DESC, SAVED_CARD_DESC,
+  OPEN_LIST_POPOVER, CLOSE_LIST_POPOVER
 } from '../actions'
 
 function lists(state = {
@@ -122,13 +123,27 @@ function currentCard(state = { id: null, editingDesc: false }, action) {
   }
 }
 
+function listPopover(state = { status: 'close', listId: null, position: {top: null, left: null} }, action) {
+  switch (action.type) {
+    case CLOSE_LIST_POPOVER:
+      return Object.assign({}, state, { status: 'close' } )
+    case OPEN_LIST_POPOVER:
+      return Object.assign({}, state, { status: 'open',
+                                        listId: action.popover.listId,
+                                        position: {top: action.popover.position.top, left: action.popover.position.left} })
+    default:
+      return state
+  }
+}
+
 
 const rootReducer = combineReducers({
   lists,
   cards,
   addingCardTo: add_cards,
   addingList,
-  currentCard
+  currentCard,
+  listPopover
 })
 
 export default rootReducer

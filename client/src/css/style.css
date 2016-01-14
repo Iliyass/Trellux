@@ -637,3 +637,36 @@ textarea.field {
     outline: rgb(255, 255, 255) none 0px;
     padding: 5px 20px;
 }
+
+
+.list-header-menu-icon {
+    background-clip: content-box;
+    background-origin: content-box;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #999;
+    cursor: pointer;
+}
+.list-header-menu-icon:hover{
+    color: #4d4d4d;
+}
+
+.pop-over {
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #d6dadc;
+    border-bottom-color: #c4c9cc;
+    box-shadow: 0 1px 6px rgba(0,0,0,.15);
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    right: -9999px;
+    top: -9999px;
+    width: 300px;
+    z-index: 70;
+}
+.pop-over.is-shown {
+    display: block;
+}

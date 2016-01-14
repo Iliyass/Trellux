@@ -15,12 +15,13 @@ export default ({
   currentCard,
   closeCardHandler,
   editingCardDescHandler,
-  saveCardDescHandler
+  saveCardDescHandler,
+  openListOptionsHanlder
 }) => {
   return (
     <div onClick={boardClickHandler}>
       {
-        lists.map((list) => (<List saveCardDescHandler={saveCardDescHandler} editingCardDescHandler={editingCardDescHandler} closeCardHandler={closeCardHandler} currentCard={currentCard} showingCard={showingCard} addedCardHandler={addedCardHandler} addCardHandler={addCardHandler} {...{list, addingCardTo}}  />) )
+        lists.map((list) => (<List openListOptionsHanlder={openListOptionsHanlder} saveCardDescHandler={saveCardDescHandler} editingCardDescHandler={editingCardDescHandler} closeCardHandler={closeCardHandler} currentCard={currentCard} showingCard={showingCard} addedCardHandler={addedCardHandler} addCardHandler={addCardHandler} {...{list, addingCardTo}}  />) )
       }
       <ListComposer addingList={addingList} addingListHandler={addingListHandler}  addedListHandler={addedListHandler}/>
     </div>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Lists from '../components/ListWrapper.jsx'
+import Popover from '../components/Popover.jsx'
 import { connect } from 'react-redux'
 import { requestLists, fetchLists, fetchCards,
          addingCard, postCard, addingList,
          postList, revokeAdding, showCard,
-         closeCard, editingCardDesc, postCardDesc
+         closeCard, editingCardDesc, postCardDesc,
+         openListPopover, closeListPopover
         } from '../actions'
 
 class Board extends Component{
@@ -22,12 +24,15 @@ class Board extends Component{
   }
   addingCardHandler (listId) {
     this.dispatch(addingCard(listId))
+    this.dispatch(closeListPopover())
   }
   addedCardHandler (listId, cardContent){
     this.dispatch(postCard(listId, cardContent))
+    this.dispatch(closeListPopover())
   }
   addingListHandler (){
     this.dispatch(addingList())
+    this.dispatch(closeListPopover())
   }
   addedListHandler (listName){
     this.dispatch(postList(listName))
@@ -35,6 +40,8 @@ class Board extends Component{
   boardClickHandler(e){
     if(e.target === this.boardNode){
       this.dispatch(revokeAdding())
+      this.dispatch(closeListPopover())
+
     }
   }
   closeCardHandler(){
@@ -42,6 +49,8 @@ class Board extends Component{
   }
   showingCard (cardId){
     this.dispatch(showCard(cardId))
+    this.dispatch(closeListPopover())
+
   }
   editingCardDescHandler(cardId){
     this.dispatch(editingCardDesc(cardId))
@@ -50,9 +59,18 @@ class Board extends Component{
     console.log("saveCardDescHandler", card);
     this.dispatch(postCardDesc(card))
   }
+  openListOptionsHanlder({clientY, clientX}, listId){
+    if(this.props.listPopover.status === "close"){
+      this.dispatch(openListPopover({ position : { top : clientY + 20, left: clientX}, listId }))
+    }
+    else {
+      this.dispatch(closeListPopover())
+    }
+  }
   render() {
-    const {isFetching, lists, addingList, currentCard} = this.props
-    const content = (! isFetching) ? <Lists saveCardDescHandler={(card) => this.saveCardDescHandler(card) }
+    const {isFetching, lists, addingList, currentCard, listPopover} = this.props
+    const content = (! isFetching) ? <Lists openListOptionsHanlder={(e, id) => this.openListOptionsHanlder(e, id)}
+                                            saveCardDescHandler={(card) => this.saveCardDescHandler(card) }
                                             editingCardDescHandler={(id) => {this.editingCardDescHandler(id)}}
                                             closeCardHandler={() => this.closeCardHandler() }
                                             showingCard={(id) => this.showingCard(id)}
@@ -65,6 +83,7 @@ class Board extends Component{
     return (
         <div id="board" onClick={(e) => this.boardClickHandler(e) } ref={(r) => this.boardNode = r}>
           { content }
+          <Popover {...listPopover}/>
         </div>
     )
   }
@@ -86,7 +105,8 @@ function mapStateToProps(state){
     lists: items,
     addingCardTo: state.addingCardTo,
     addingList: state.addingList,
-    currentCard: state.currentCard
+    currentCard: state.currentCard,
+    listPopover: state.listPopover
   }
 }
 

@@ -10,7 +10,8 @@ export default ({
   currentCard,
   closeCardHandler,
   editingCardDescHandler,
-  saveCardDescHandler
+  saveCardDescHandler,
+  openListOptionsHanlder
 }) => {
   const { _id, name = 'Name', cards = [] } = list
   console.log("List addingCardTo", (addingCardTo === _id))
@@ -22,6 +23,7 @@ export default ({
     			<h2 className="list-name-text">
     				{name}
     			</h2>
+          <a className="list-header-menu-icon" onMouseUp={(e) => openListOptionsHanlder(e, _id)}><i className="fa fa-chevron-circle-down"></i></a>
     		</div>
 
     		<div className="list-cards-container">

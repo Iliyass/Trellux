@@ -19,6 +19,23 @@ export const REVOKE_ADDING = 'REVOKE_ADDING'
 export const SHOW_CARD = 'SHOW_CARD'
 export const CLOSE_CARD = 'CLOSE_CARD'
 
+
+export const OPEN_LIST_POPOVER = 'OPEN_LIST_POPOVER'
+export const CLOSE_LIST_POPOVER = 'CLOSE_LIST_POPOVER'
+
+export function closeListPopover() {
+  return {
+    type: CLOSE_LIST_POPOVER
+  }
+}
+
+export function openListPopover(popover) {
+  return {
+    type: OPEN_LIST_POPOVER,
+    popover
+  }
+}
+
 export function savedCardDesc() {
   return {
     type: SAVED_CARD_DESC
