@@ -665,8 +665,111 @@ textarea.field {
     right: -9999px;
     top: -9999px;
     width: 300px;
-    z-index: 70;
+    z-index: 0;
 }
+
 .pop-over.is-shown {
     display: block;
+}
+
+
+.pop-over-header {
+    height: 36px;
+    position: relative;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+
+.pop-over-header-title {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #8c8c8c;
+    display: block;
+    line-height: 36px;
+    border-bottom: 1px solid #d6dadc;
+    margin: 0 10px;
+    overflow: hidden;
+    padding: 0 2pc;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 1;
+}
+.pop-over-header-close-btn {
+    padding: 7px 10px 10px 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.pop-over-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0 10px 10px;
+}
+
+ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.pop-over-list li>a {
+    cursor: pointer;
+    display: block;
+    padding: 6px 10px;
+    position: relative;
+    margin: 0 -10px;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.pop-over-list li>a.item-warning{
+  color: #F70000;
+}
+
+.pop-over-list li>a:hover {
+    background-color: #298fca;
+    color: #fff;
+}
+
+.btn.success {
+  box-shadow: rgb(63, 111, 33) 0px 1px 0px 0px;
+  background: rgba(0, 0, 0, 0) linear-gradient(rgb(97, 189, 79) 0px, rgb(90, 172, 68) 100%) repeat scroll 0% 0% / auto padding-box border-box;
+  border: 0px none rgb(255, 255, 255);
+}
+
+.btn.warning {
+    box-shadow: rgb(111, 33, 46) 0px 1px 0px 0px;
+    background: rgba(0, 0, 0, 0) linear-gradient(rgb(189, 79, 79) 0px, rgb(175, 0, 0) 100%) repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+}
+
+.btn {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 30px;
+    float: left;
+    min-height: 30px;
+    text-align: center;
+    width: 72.4531px;
+    align-items: flex-start;
+    perspective-origin: 36.2188px 15px;
+    transform-origin: 36.2188px 15px;
+    border-radius: 3px 3px 3px 3px;
+    font: normal normal bold normal 14px / 22px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 5px 20px;
+    margin-right: 10px;
+}
+
+.alert-options{
+  margin: 2px 8px 1px 57px;
+  overflow: hidden;
+}
+
+.grow {
+  transform: translate(-50%, -50%) scale(1.3) !important; 
 }

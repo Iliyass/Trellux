@@ -19,7 +19,7 @@ export default React.createClass({
                   <span onClick={() => {this.props.addingListHandler()}}>Add a list…</span>
                   <input className="list-name-input" type="text" name="name" placeholder="Add a list…"  ref={(l) => this.listName = l}/>
                   <div className="edit-controls">
-                    <input type="button" value="Save" onClick={() => this.props.addedListHandler(this.listName.value) } />
+                    <input type="button" value="Save" onClick={() => {this.props.addedListHandler(this.listName.value); this.listName.value = ''; }} />
                   </div>
               </div>
           </div>

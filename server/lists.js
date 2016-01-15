@@ -27,13 +27,23 @@ function add(model, cb) {
   list.save(cb)
 }
 
-function remove(){
-
+function remove(listId, cb){
+  List.remove({_id: listId}, (err) =>{
+    if(err) console.log("Error")
+    cb()
+  })
 }
 
 // Init Lists Module
 function Init() {
   let router = express.Router()
+
+  router.delete('/:listId', function(req, res) {
+    remove(req.params.listId, () => {
+      res.send({status: "success"})
+    })
+  })
+
   // POSTS: /lists/
   router.post('/', function(req, res) {
     const list = req.body

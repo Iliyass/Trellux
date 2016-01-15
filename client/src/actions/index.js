@@ -7,6 +7,24 @@ export const RECEIVE_LISTS    = 'RECEIVE_LISTS'
 export const REQUEST_CARDS    = 'REQUEST_CARDS'
 export const RECEIVE_CARDS    = 'RECEIVE_CARDS'
 export const INVALIDATE_LIST  = 'INVALIDATE_LIST'
+export const DELETE_LIST      = 'DELETE_LIST'
+
+export function deleteList(listId) {
+  return {
+    type: DELETE_LIST,
+    listId
+  }
+}
+
+const DELETE_LIST_URL = "http://localhost:3000/lists/:listId"
+const DELETE_REQUEST_OPTIONS = { method: 'delete',   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' } }
+
+export function fetchDeleteList(listId){
+  return dispatch => {
+    return fetch(DELETE_LIST_URL.replace(':listId', listId), GENERATE_POST({listId}, DELETE_REQUEST_OPTIONS))
+            .then(dispatch(deleteList(listId)))
+  }
+}
 
 export const ADDING_CARD = 'ADDING_CARD'
 export const POSTED_CARD = 'POSTED_CARD'
@@ -18,6 +36,27 @@ export const REVOKE_ADDING = 'REVOKE_ADDING'
 
 export const SHOW_CARD = 'SHOW_CARD'
 export const CLOSE_CARD = 'CLOSE_CARD'
+
+export const OPEN_ALERT_MODAL = 'OPEN_ALERT_MODAL'
+export const CLOSE_ALERT_MODAL = 'CLOSE_ALERT_MODAL'
+
+export function openAlertModal(desc, triggeredBy, item) {
+  return {
+    type: OPEN_ALERT_MODAL,
+    desc,
+    triggeredBy,
+    item
+  }
+}
+
+export function closeAlertModal(response, triggeredBy, item) {
+  return{
+    type: CLOSE_ALERT_MODAL,
+    response,
+    triggeredBy,
+    item
+  }
+}
 
 
 export const OPEN_LIST_POPOVER = 'OPEN_LIST_POPOVER'

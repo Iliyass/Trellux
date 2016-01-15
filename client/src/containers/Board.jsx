@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Lists from '../components/ListWrapper.jsx'
-import Popover from '../components/Popover.jsx'
+import ListOptions from '../components/ListOptions.jsx'
+import AlertModal from '../components/AlertModal.jsx'
 import { connect } from 'react-redux'
 import { requestLists, fetchLists, fetchCards,
          addingCard, postCard, addingList,
          postList, revokeAdding, showCard,
          closeCard, editingCardDesc, postCardDesc,
-         openListPopover, closeListPopover
+         openListPopover, closeListPopover, openAlertModal,
+         closeAlertModal, DELETE_LIST, fetchDeleteList
         } from '../actions'
 
 class Board extends Component{
@@ -56,19 +58,33 @@ class Board extends Component{
     this.dispatch(editingCardDesc(cardId))
   }
   saveCardDescHandler(card){
-    console.log("saveCardDescHandler", card);
     this.dispatch(postCardDesc(card))
   }
   openListOptionsHanlder({clientY, clientX}, listId){
-    if(this.props.listPopover.status === "close"){
+    if(listId === this.props.listPopover.listId){
+      if(this.props.listPopover.status === "close"){
+        this.dispatch(openListPopover({ position : { top : clientY + 20, left: clientX}, listId }))
+      }
+      else {
+        this.dispatch(closeListPopover())
+      }
+    }else{
+      this.dispatch(closeListPopover())
       this.dispatch(openListPopover({ position : { top : clientY + 20, left: clientX}, listId }))
     }
-    else {
-      this.dispatch(closeListPopover())
+  }
+  deleteListHandler(listId){
+    this.dispatch(openAlertModal("Are you sure ?", DELETE_LIST, listId))
+  }
+  closeAlertHandler(res, triggeredBy, item){
+    this.dispatch(closeAlertModal(res, triggeredBy, item))
+    if(triggeredBy === DELETE_LIST && res){
+      this.dispatch(fetchDeleteList(item))
     }
+    this.dispatch(closeListPopover())
   }
   render() {
-    const {isFetching, lists, addingList, currentCard, listPopover} = this.props
+    const {isFetching, lists, addingList, currentCard, listPopover, alertModal} = this.props
     const content = (! isFetching) ? <Lists openListOptionsHanlder={(e, id) => this.openListOptionsHanlder(e, id)}
                                             saveCardDescHandler={(card) => this.saveCardDescHandler(card) }
                                             editingCardDescHandler={(id) => {this.editingCardDescHandler(id)}}
@@ -83,7 +99,8 @@ class Board extends Component{
     return (
         <div id="board" onClick={(e) => this.boardClickHandler(e) } ref={(r) => this.boardNode = r}>
           { content }
-          <Popover {...listPopover}/>
+          <ListOptions {...listPopover} deleteListHandler={(listId) => this.deleteListHandler(listId)} addCardHandler={(listId) => this.addingCardHandler(listId)} closeListOptionsHanlder={(listId) => this.openListOptionsHanlder({}, listId)} />
+          <AlertModal {...alertModal}  alertResponseHandler={(res, triggeredBy, item) => {this.closeAlertHandler(res, triggeredBy, item)}}/>
         </div>
     )
   }
@@ -106,7 +123,8 @@ function mapStateToProps(state){
     addingCardTo: state.addingCardTo,
     addingList: state.addingList,
     currentCard: state.currentCard,
-    listPopover: state.listPopover
+    listPopover: state.listPopover,
+    alertModal: state.alertModal
   }
 }
 

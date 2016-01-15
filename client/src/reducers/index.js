@@ -7,7 +7,9 @@ import {
   REVOKE_ADDING, SHOW_CARD,
   CLOSE_CARD, EDITING_CARD_DESC,
   SAVING_CARD_DESC, SAVED_CARD_DESC,
-  OPEN_LIST_POPOVER, CLOSE_LIST_POPOVER
+  OPEN_LIST_POPOVER, CLOSE_LIST_POPOVER,
+  OPEN_ALERT_MODAL, CLOSE_ALERT_MODAL,
+  DELETE_LIST
 } from '../actions'
 
 function lists(state = {
@@ -32,6 +34,12 @@ function lists(state = {
                   didInvalidate: false,
                   items: state.items.concat([action.list])
         })
+      case DELETE_LIST:
+        return Object.assign({}, state, {
+              isFetching: false,
+              didInvalidate: false,
+              items: state.items.filter(({_id}) => _id != action.listId)
+          })
       default:
         return state
     }
@@ -136,6 +144,17 @@ function listPopover(state = { status: 'close', listId: null, position: {top: nu
   }
 }
 
+function alertModal(state = { status: 'close', desc: '', response: false, triggeredBy: null, item: null}, action) {
+  switch (action.type) {
+    case OPEN_ALERT_MODAL:
+      return Object.assign({}, state, { status: 'open', desc: action.desc, response: null, triggeredBy: action.triggeredBy, item: action.item})
+    case CLOSE_ALERT_MODAL:
+      return Object.assign({}, state, { status: 'close', desc: '', response: action.response, triggeredBy: action.triggeredBy, item: action.item})
+    default:
+      return state
+  }
+}
+
 
 const rootReducer = combineReducers({
   lists,
@@ -143,7 +162,8 @@ const rootReducer = combineReducers({
   addingCardTo: add_cards,
   addingList,
   currentCard,
-  listPopover
+  listPopover,
+  alertModal
 })
 
 export default rootReducer
