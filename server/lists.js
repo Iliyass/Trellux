@@ -23,8 +23,12 @@ function all(cb) {
 
 // CRUD Functions
 function add(model, cb) {
-  const list = new List(model)
-  list.save(cb)
+  List.count({}, (err, count) => {
+    model.position = count + 1
+    const list = new List(model)
+    list.save(cb)
+  })
+
 }
 
 function remove(listId, cb){

@@ -3,3 +3,4 @@
 /client/dist/*
 !/client/dist/index.html
 /**/node_modules/
+/server/npm-debug.log

@@ -9,7 +9,7 @@ import {
   SAVING_CARD_DESC, SAVED_CARD_DESC,
   OPEN_LIST_POPOVER, CLOSE_LIST_POPOVER,
   OPEN_ALERT_MODAL, CLOSE_ALERT_MODAL,
-  DELETE_LIST
+  DELETE_LIST, CHANGE_POSITION_LIST
 } from '../actions'
 
 function lists(state = {
@@ -39,6 +39,20 @@ function lists(state = {
               isFetching: false,
               didInvalidate: false,
               items: state.items.filter(({_id}) => _id != action.listId)
+          })
+      case CHANGE_POSITION_LIST:
+        return Object.assign({}, state, {
+          isFetching: false,
+          didInvalidate: false,
+          items: state.items.map(list => {
+              if(list._id === action.fromList.id){
+                list.position = Number(action.toList.position)
+              }
+              if(list._id === action.toList.id){
+                list.position = Number(action.fromList.position)
+              }
+              return list
+            }).sort( (a,b) => Number(a.position) - Number(b.position) )
           })
       default:
         return state

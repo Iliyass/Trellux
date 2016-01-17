@@ -9,6 +9,17 @@ export const RECEIVE_CARDS    = 'RECEIVE_CARDS'
 export const INVALIDATE_LIST  = 'INVALIDATE_LIST'
 export const DELETE_LIST      = 'DELETE_LIST'
 
+
+export const CHANGE_POSITION_LIST = 'CHANGE_POSITION_LIST'
+
+export function changePositionList(fromList, toList) {
+  return {
+    type: CHANGE_POSITION_LIST,
+    fromList,
+    toList
+  }
+}
+
 export function deleteList(listId) {
   return {
     type: DELETE_LIST,

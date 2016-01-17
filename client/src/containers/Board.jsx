@@ -8,7 +8,8 @@ import { requestLists, fetchLists, fetchCards,
          postList, revokeAdding, showCard,
          closeCard, editingCardDesc, postCardDesc,
          openListPopover, closeListPopover, openAlertModal,
-         closeAlertModal, DELETE_LIST, fetchDeleteList
+         closeAlertModal, DELETE_LIST, fetchDeleteList,
+         changePositionList
         } from '../actions'
 
 class Board extends Component{
@@ -83,6 +84,9 @@ class Board extends Component{
     }
     this.dispatch(closeListPopover())
   }
+  changePositionHandler(id, position){
+    this.dispatch(changePositionList(id, position))
+  }
   render() {
     const {isFetching, lists, addingList, currentCard, listPopover, alertModal} = this.props
     const content = (! isFetching) ? <Lists openListOptionsHanlder={(e, id) => this.openListOptionsHanlder(e, id)}
@@ -94,7 +98,8 @@ class Board extends Component{
                                             addingList={addingList}
                                             addingListHandler={() => this.addingListHandler() }
                                             addedCardHandler={(id, cardContent) => this.addedCardHandler(id, cardContent) }
-                                            addCardHandler={(id) => this.addingCardHandler(id)} {...this.props}  />
+                                            addCardHandler={(id) => this.addingCardHandler(id)} {...this.props}
+                                            changePositionHandler={(i, p) => this.changePositionHandler(i, p)} />
                                             : <h2> Loading ... </h2>
     return (
         <div id="board" onClick={(e) => this.boardClickHandler(e) } ref={(r) => this.boardNode = r}>

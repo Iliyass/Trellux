@@ -11,14 +11,17 @@ export default ({
   closeCardHandler,
   editingCardDescHandler,
   saveCardDescHandler,
-  openListOptionsHanlder
+  openListOptionsHanlder,
+  dragEnd,
+  dragStart,
+  dragOver
 }) => {
-  const { _id, name = 'Name', cards = [] } = list
+  const { _id, name = 'Name', position, cards = [] } = list
   console.log("List addingCardTo", (addingCardTo === _id))
   const cardComposer = (addingCardTo === _id) ? (<CardComposer listId={_id} addedCardHandler={addedCardHandler} />) : ''
   return (
     <div className="list-wrapper">
-    	<div className="list-container">
+    	<div className="list-container" draggable="true" data-position={position} data-id={_id} onDragOver={dragOver} onDragEnd={dragEnd} onDragStart={dragStart}>
     		<div className="list-name">
     			<h2 className="list-name-text">
     				{name}
