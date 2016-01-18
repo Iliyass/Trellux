@@ -15,6 +15,7 @@ export default React.createClass({
     this.currentOver.className = this.currentOver.className.replace('dragged', '')
     this.listWrapper.className = this.listWrapper.className.replace(new RegExp('placeholder', 'g'), '')
     this.dragged.style.display = 'block'
+    this.currentOver.style.opacity = 1
 
   },
   dragStart: function(e) {
@@ -44,7 +45,11 @@ export default React.createClass({
 
     this.currentOver = $.closest(e.target, 'list-container')
 
+    let currentWrapper = this.currentOver.parentNode
+
     this.dragged.style.display = 'none'
+
+
 
     // console.log("=== DRAGGED ===", this.dragged.dataset);
     // console.log("=== DRAGGED ===", this.dragged);
@@ -64,10 +69,26 @@ export default React.createClass({
     //   this.previousOver = null
     // }
 
+      if(this.previousOver && this.previousOver.dataset.id != this.currentOver.dataset.id){
+          console.log("NOT THE SAME");
+          this.previousOver.style.opacity = 1
+          this.currentOver.style.opacity = .5
+      }
 
-      // this.currentOver.parentNode.className += ' placeholder'
-      // this.currentOver.parentNode.style.height = this.height + 'px'
-      // this.currentOver.parentNode.style.width = this.width + 'px'
+      if(currentWrapper.className.indexOf(' placeholder') === -1){
+
+        currentWrapper.className += ' placeholder'
+        currentWrapper.style.height = this.height + 'px'
+        currentWrapper.style.width = this.width + 'px'
+
+        // this.listWrapper.innerHTML = ''
+        // this.listWrapper.appendChild(this.currentOver)
+
+        this.currentOver.style.opacity = 0.5
+
+      }
+
+
       this.previousOver = this.currentOver
 //
     // if((this.previousOver) && this.currentOver != this.previousOver){
